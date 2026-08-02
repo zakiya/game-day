@@ -1,12 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap");
+
 :root {
   --gd-bg: transparent;
   --gd-text: #1a1a1a;
-  --gd-heading: #0a2240;
-  --gd-link: #0a58ca;
-  --gd-link-hover: #083d8c;
-  --gd-theme: #0a2240;
+  --gd-heading: #058293;
+  --gd-link: #091f40;
+  --gd-link-hover: #058293;
+  --gd-theme: #091f40;
   --gd-font: system-ui, -apple-system, "Segoe UI", sans-serif;
   --gd-gap: 1.5rem;
+  --pink: #E82176;
+  --font-heading: "Roboto Slab", Georgia, serif;
 }
 
 body {
@@ -15,6 +19,7 @@ body {
   color: var(--gd-text);
   font-family: var(--gd-font);
   line-height: 1.5;
+  max-width: 368px;
 }
 
 .game-day {
@@ -26,14 +31,28 @@ body {
 h2 {
   margin: 0 0 0.5rem;
   color: var(--gd-heading);
+  font-size: 2rem;
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+h4 {
+  margin: 0 0 0.5rem;
   font-size: 1.125rem;
+  font-family: var(--font-heading);
+  font-weight: 400;
 }
 
 .theme {
   margin: 0;
-  color: var(--gd-theme);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.55rem;
+  font-weight: 400;
+  font-family: var(--font-heading);
+}
+section {
+  border: 2px solid var(--pink);
+  border-radius: 16px;
+  padding: 1rem;
 }
 
 ul {

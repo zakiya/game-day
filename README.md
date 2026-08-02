@@ -1,6 +1,6 @@
 # Game day page
 
-Generates `docs/index.html` — the next home game's schedule and important links — from the
+Generates `docs/index.html` — the next home game's heading, theme, schedule and important links from a Coda table.
 The page is published on GitHub Pages and embedded in an iframe.
 
 ## Running it locally

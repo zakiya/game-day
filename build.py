@@ -204,10 +204,17 @@ def format_time(moment):
     return f"{hour}:{moment.minute:02d} {meridiem}"
 
 
-def render(schedule, links, theme=""):
+def game_heading(kickoff, team):
+    """Friday, August 14 vs. Denver Summit"""
+    date = f"{kickoff:%A, %B} {kickoff.day}"
+    return f"{date} vs. {team}" if team else date
+
+
+def render(schedule, links, theme="", heading=""):
     if not schedule:
         body = f'    <p class="no-game">{html.escape(NO_GAME_MESSAGE)}</p>'
     else:
+        heading_block = f"    <h2>{html.escape(heading)}</h2>\n\n" if heading else ""
         theme_block = f'    <p class="theme">{html.escape(theme)}</p>\n\n' if theme else ""
         schedule_items = "\n".join(
             f"        <li><strong>{html.escape(label)}</strong> {format_time(moment)}</li>"
@@ -218,15 +225,15 @@ def render(schedule, links, theme=""):
             f"{html.escape(label)}</a></li>"
             for label, url in links
         )
-        body = f"""{theme_block}    <section class="schedule">
-      <h2>Schedule</h2>
+        body = f"""{heading_block}{theme_block}    <section class="schedule">
+      <h4>Schedule</h4>
       <ul>
 {schedule_items}
       </ul>
     </section>
 
     <section class="links">
-      <h2>Important links</h2>
+      <h4>Important links</h4>
       <ul>
 {link_items}
       </ul>
@@ -271,13 +278,14 @@ def main():
 
     if row is None:
         print(f"No upcoming home game as of {now:%Y-%m-%d %H:%M %Z}")
-        schedule, links, theme = [], [], ""
+        schedule, links, theme, heading = [], [], "", ""
     else:
         values = row.get("values", {})
         schedule = build_schedule(values, kickoff)
         links = build_links(values)
         theme = plain_text(values.get("Theme"))
-        print(f"Next home game: {plain_text(values.get('Team'))} - {kickoff:%a %b %-d, %Y}")
+        heading = game_heading(kickoff, plain_text(values.get("Team")))
+        print(f"Next home game: {heading} ({kickoff.year})")
         if theme:
             print(f"Theme: {theme}")
         for label, moment in schedule:
@@ -285,7 +293,7 @@ def main():
         for label, url in links:
             print(f"  link: {label} -> {url}")
 
-    document = render(schedule, links, theme)
+    document = render(schedule, links, theme, heading)
 
     if args.dry_run:
         print()
