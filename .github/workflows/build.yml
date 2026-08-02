@@ -1,0 +1,48 @@
+name: Build game day page
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 15 * * 1" # Mondays, 8:00 AM Pacific
+  repository_dispatch:
+    types: [coda-update]
+  push:
+    branches: [main]
+    paths:
+      - build.py
+      - docs/styles.css
+      - .github/workflows/build.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-game-day
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build page
+        env:
+          CODA: ${{ secrets.CODA }}
+        run: python build.py
+
+      - name: Commit if the page changed
+        run: |
+          if git diff --quiet -- docs/index.html; then
+            echo "No change to docs/index.html"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html
+          git commit -m "Update game day page"
+          git push

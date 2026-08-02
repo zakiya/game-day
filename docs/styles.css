@@ -1,0 +1,47 @@
+:root {
+  --gd-bg: transparent;
+  --gd-text: #1a1a1a;
+  --gd-heading: #0a2240;
+  --gd-link: #0a58ca;
+  --gd-link-hover: #083d8c;
+  --gd-font: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gd-gap: 1.5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--gd-bg);
+  color: var(--gd-text);
+  font-family: var(--gd-font);
+  line-height: 1.5;
+}
+
+.game-day {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gd-gap);
+}
+
+h2 {
+  margin: 0 0 0.5rem;
+  color: var(--gd-heading);
+  font-size: 1.125rem;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li + li {
+  margin-top: 0.25rem;
+}
+
+a {
+  color: var(--gd-link);
+}
+
+a:hover {
+  color: var(--gd-link-hover);
+}
