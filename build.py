@@ -204,10 +204,11 @@ def format_time(moment):
     return f"{hour}:{moment.minute:02d} {meridiem}"
 
 
-def render(schedule, links):
+def render(schedule, links, theme=""):
     if not schedule:
         body = f'    <p class="no-game">{html.escape(NO_GAME_MESSAGE)}</p>'
     else:
+        theme_block = f'    <p class="theme">{html.escape(theme)}</p>\n\n' if theme else ""
         schedule_items = "\n".join(
             f"        <li><strong>{html.escape(label)}</strong> {format_time(moment)}</li>"
             for label, moment in schedule
@@ -217,7 +218,7 @@ def render(schedule, links):
             f"{html.escape(label)}</a></li>"
             for label, url in links
         )
-        body = f"""    <section class="schedule">
+        body = f"""{theme_block}    <section class="schedule">
       <h2>Schedule</h2>
       <ul>
 {schedule_items}
@@ -270,7 +271,7 @@ def main():
 
     if row is None:
         print(f"No upcoming home game as of {now:%Y-%m-%d %H:%M %Z}")
-        schedule, links = [], []
+        schedule, links, theme = [], [], ""
     else:
         values = row.get("values", {})
         schedule = build_schedule(values, kickoff)
@@ -284,7 +285,7 @@ def main():
         for label, url in links:
             print(f"  link: {label} -> {url}")
 
-    document = render(schedule, links)
+    document = render(schedule, links, theme)
 
     if args.dry_run:
         print()

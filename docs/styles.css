@@ -4,6 +4,7 @@
   --gd-heading: #0a2240;
   --gd-link: #0a58ca;
   --gd-link-hover: #083d8c;
+  --gd-theme: #0a2240;
   --gd-font: system-ui, -apple-system, "Segoe UI", sans-serif;
   --gd-gap: 1.5rem;
 }
@@ -26,6 +27,13 @@ h2 {
   margin: 0 0 0.5rem;
   color: var(--gd-heading);
   font-size: 1.125rem;
+}
+
+.theme {
+  margin: 0;
+  color: var(--gd-theme);
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 ul {
