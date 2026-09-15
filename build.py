@@ -205,8 +205,8 @@ def format_time(moment):
 
 
 def game_heading(kickoff, team):
-    """Friday, August 14 vs. Denver Summit"""
-    date = f"{kickoff:%A, %B} {kickoff.day}"
+    """Fri, Aug 14 vs. Denver Summit"""
+    date = f"{kickoff:%a, %b} {kickoff.day}"
     return f"{date} vs. {team}" if team else date
 
 
