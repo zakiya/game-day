@@ -55,6 +55,10 @@ section {
   padding: 1rem;
 }
 
+section.services {
+  border-color: var(--gd-heading)
+}
+
 ul {
   margin: 0;
   padding: 0;

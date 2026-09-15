@@ -225,7 +225,15 @@ def render(schedule, links, theme="", heading=""):
             f"{html.escape(label)}</a></li>"
             for label, url in links
         )
-        body = f"""{heading_block}{theme_block}    <section class="schedule">
+        body = f"""{heading_block}{theme_block}
+            <section class="services">
+              <h4>Snapdragon Guest Services</h4>
+              <p>
+              Text (619) 393-5705
+              </p>
+              </section>
+
+          <section class="schedule">
       <h4>Schedule</h4>
       <ul>
 {schedule_items}
@@ -237,7 +245,10 @@ def render(schedule, links, theme="", heading=""):
       <ul>
 {link_items}
       </ul>
-    </section>"""
+    </section>
+        </section>
+
+    """
 
     return f"""<!DOCTYPE html>
 <html lang="en">
